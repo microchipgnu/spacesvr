@@ -215,30 +215,39 @@ const DesktopOnboarding = () => {
         <Text>
           <p>Pause with the {isMobile ? "Menu Button" : "Esc key"}</p>
         </Text>
-        <InfoPics>
-          <Keys>
-            <Key>W</Key>
-            <BottomKeys>
-              <Key>A</Key>
-              <Key>S</Key>
-              <Key>D</Key>
-            </BottomKeys>
-          </Keys>
-          <img
-            src={
-              isMobile
-                ? "https://d27rt3a60hh1lx.cloudfront.net/images/joystick.gif"
-                : "https://d27rt3a60hh1lx.cloudfront.net/images/source.gif"
-            }
-            width={isMobile ? 100 : 175}
-            style={{
-              mixBlendMode: "multiply",
-              position: "relative",
-              left: "13px",
-              bottom: "25px",
-            }}
-          />
-        </InfoPics>
+        {isMobile ? (
+          <InfoPics>
+            <img
+              src="https://d27rt3a60hh1lx.cloudfront.net/images/joystick.gif"
+              width={100}
+              style={{
+                mixBlendMode: "multiply",
+                position: "relative",
+                left: "35px",
+                bottom: "25px",
+              }}
+            />
+            <img
+              src="https://d27rt3a60hh1lx.cloudfront.net/images/gesture.gif"
+              width={120}
+            />
+          </InfoPics>
+        ) : (
+          <InfoPics>
+            <Keys>
+              <Key>W</Key>
+              <BottomKeys>
+                <Key>A</Key>
+                <Key>S</Key>
+                <Key>D</Key>
+              </BottomKeys>
+            </Keys>
+            <img
+              src="https://d27rt3a60hh1lx.cloudfront.net/images/source.gif"
+              width={175}
+            />
+          </InfoPics>
+        )}
         <Captions>
           <p>Move</p>
           <p>Look Around</p>
