@@ -9,7 +9,7 @@ const Container = styled.div<{ paused: boolean }>`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 50;
+  z-index: 100;
   transition: opacity 0.25s ease;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
@@ -48,7 +48,7 @@ const Window = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   position: relative;
   border-radius: 3%;
   background-image: url("https://d27rt3a60hh1lx.cloudfront.net/images/muse-bg.jpg");
@@ -102,7 +102,7 @@ const Instagram = styled.div`
 `;
 
 const Header = styled.div`
-  margin-top: 8%;
+  margin-top: 15%;
   width: auto;
   display: flex;
   flex-direction: column;
@@ -127,21 +127,68 @@ const Text = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   & > p {
     margin: 0.2em;
   }
 `;
 
-const DesktopPause = () => {
-  const { paused, overlay, setPaused } = useEnvironment();
-  const closeOverlay = () => setPaused(false);
+const InfoPics = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Keys = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+`;
+
+const Key = styled.div`
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.5);
+  border: 2px solid white;
+  margin-bottom: 7px;
+`;
+
+const Captions = styled.div`
+  width: 67%;
+  margin-top: -20px;
+  margin-left: 25px;
+  font-size: 0.6em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const BottomKeys = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+`;
+
+const DesktopOnboarding = () => {
+  const { paused, overlay, setPaused, firstVisit, setVisit } = useEnvironment();
+  const closeOverlay = () => {
+    setPaused(false);
+    setVisit(false);
+  };
 
   if (overlay) {
     return null;
   }
 
-  return (
+  return firstVisit ? (
     <Container paused={paused}>
       <ClickContainer onClick={closeOverlay} />
       <Window>
@@ -152,17 +199,35 @@ const DesktopPause = () => {
           @musehq
         </Instagram>
         <Header>
-          <Title>muse</Title>
+          <Title>Muse</Title>
         </Header>
         <Text>
-          <p>Move around: {isMobile ? "Joystick" : "W/A/S/D"}</p>
-          <p>Look around: {isMobile ? "Drag" : "Mouse"}</p>
-          <p>Pause: {isMobile ? "Menu Button" : "Esc"}</p>
+          <p>Pause with the {isMobile ? "Menu Button" : "Esc key"}</p>
         </Text>
+        <InfoPics>
+          <Keys>
+            <Key>W</Key>
+            <BottomKeys>
+              <Key>A</Key>
+              <Key>S</Key>
+              <Key>D</Key>
+            </BottomKeys>
+          </Keys>
+          <img
+            src="https://d27rt3a60hh1lx.cloudfront.net/images/source.gif"
+            width={175}
+          />
+        </InfoPics>
+        <Captions>
+          <p>Move</p>
+          <p>Look Around</p>
+        </Captions>
       </Window>
       <Continue onClick={closeOverlay}>continue</Continue>
     </Container>
+  ) : (
+    <></>
   );
 };
 
-export default DesktopPause;
+export default DesktopOnboarding;

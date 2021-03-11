@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -33,9 +34,18 @@ export function useKeyframeEnvironment(): KeyframeEnvironmentState {
 export function useEnvironmentState(): EnvironmentState {
   const [paused, setPausedState] = useState(true);
   const [overlay, setOverlayState] = useState(null);
+  const [firstVisit, setVisitedState] = useState(true);
   const container = useRef<HTMLDivElement>(null);
   const events = useRef<EnvironmentEvent[]>([]);
   const player = useRef<PlayerRef>({} as PlayerRef);
+
+  useLayoutEffect(() => {
+    if (window.localStorage.getItem("login")) {
+      setVisit(false);
+    } else {
+      window.localStorage.setItem("login", "visited");
+    }
+  }, []);
 
   const setPaused = useCallback(
     (p, o) => {
@@ -60,6 +70,13 @@ export function useEnvironmentState(): EnvironmentState {
     [events]
   );
 
+  const setVisit = useCallback(
+    (val) => {
+      setVisitedState(val);
+    },
+    [events]
+  );
+
   const setPlayer = (p: PlayerRef) => {
     player.current = p;
   };
@@ -79,12 +96,14 @@ export function useEnvironmentState(): EnvironmentState {
   const context: EnvironmentState = {
     type: Environment.STANDARD,
     paused,
+    firstVisit,
     overlay,
     player: player.current,
     containerRef: container,
     container: container.current,
     events: events.current,
     setPaused,
+    setVisit,
     setPlayer,
     addEvent,
   };

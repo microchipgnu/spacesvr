@@ -21,12 +21,14 @@ export interface EnvironmentState {
   type: Environment;
   paused: boolean;
   player: PlayerRef;
+  firstVisit: boolean;
   overlay: string | null;
   containerRef: MutableRefObject<HTMLDivElement | null>;
   container: HTMLDivElement | null;
   events: EnvironmentEvent[];
   setPlayer: (p: PlayerRef) => void;
   setPaused: (p: boolean, overlay?: string) => void;
+  setVisit: (val: boolean) => void;
   addEvent: (name: string, callback: (...args: any[]) => void) => void;
 }
 

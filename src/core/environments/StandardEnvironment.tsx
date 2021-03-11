@@ -20,6 +20,7 @@ import { ResizeObserver } from "@juggle/resize-observer";
 import { LoadingContext, useLoadingState } from "../contexts/loading";
 import { MountOnLoad } from "../loader/MountOnLoad";
 import AssetLoader from "../loader/AssetLoader";
+import DesktopOnboarding from "../overlays/DesktopOnboarding";
 
 const Container = styled.div`
   position: absolute;
@@ -129,6 +130,7 @@ export const StandardEnvironment = (
           <EnvironmentContext.Provider value={envState}>
             {loadingScreen || <LoadingScreen />}
             {pauseMenu || <DesktopPause />}
+            <DesktopOnboarding />
             <Crosshair />
           </EnvironmentContext.Provider>
         </LoadingContext.Provider>
