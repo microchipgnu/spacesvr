@@ -138,6 +138,9 @@ const InfoPics = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 400px) {
+    margin-top: -20px;
+  }
 `;
 
 const Keys = styled.div`
@@ -158,6 +161,10 @@ const Key = styled.div`
   box-shadow: 5px 5px rgba(0, 0, 0, 0.5);
   border: 2px solid white;
   margin-bottom: 7px;
+  @media screen and (max-width: 400px) {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
 const Captions = styled.div`
@@ -168,6 +175,10 @@ const Captions = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  @media screen and (max-width: 400px) {
+    width: 75%;
+    margin-left: 30px;
+  }
 `;
 
 const BottomKeys = styled.div`
@@ -214,8 +225,18 @@ const DesktopOnboarding = () => {
             </BottomKeys>
           </Keys>
           <img
-            src="https://d27rt3a60hh1lx.cloudfront.net/images/source.gif"
-            width={175}
+            src={
+              isMobile
+                ? "https://d27rt3a60hh1lx.cloudfront.net/images/joystick.gif"
+                : "https://d27rt3a60hh1lx.cloudfront.net/images/source.gif"
+            }
+            width={isMobile ? 100 : 175}
+            style={{
+              mixBlendMode: "multiply",
+              position: "relative",
+              left: "10px",
+              bottom: "25px",
+            }}
           />
         </InfoPics>
         <Captions>
