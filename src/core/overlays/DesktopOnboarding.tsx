@@ -234,7 +234,7 @@ const DesktopOnboarding = () => {
             style={{
               mixBlendMode: "multiply",
               position: "relative",
-              left: "10px",
+              left: "13px",
               bottom: "25px",
             }}
           />
