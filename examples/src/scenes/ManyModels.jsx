@@ -1,5 +1,5 @@
 import { Vector3 } from "three";
-import { StandardEnvironment, Background, Logo, Image, Audio } from "spacesvr";
+import { StandardEnvironment, Background, Logo, Image, Scaled } from "spacesvr";
 import Building from "../models/Building";
 import MichaelModel from "../models/MichaelModel";
 import PinkWhiteDurag from "../models/PinkWhiteDurag";
@@ -25,10 +25,18 @@ export default () => {
         rotation={[0, Math.PI, 0]}
         framed
       />
-      <Building position={[4, 0, 0]} />
-      <MichaelModel position={[2, 0, 0]} scale={[5, 5, 5]} />
-      <PinkWhiteDurag position={[9, 0, 0]} scale={[5, 5, 5]} />
-      <ShoppingCart position={[-6, 0, 0]} />
+      <Scaled level={23}>
+        <Building position={[4, 0, 0]} />
+      </Scaled>
+      <Scaled level={20}>
+        <MichaelModel position={[2, 0, 0]} scale={[5, 5, 5]} />
+      </Scaled>
+      <Scaled level={10}>
+        <PinkWhiteDurag position={[9, 10, 0]} scale={[5, 5, 5]} />
+      </Scaled>
+      <Scaled level={4}>
+        <ShoppingCart position={[-6, 0, 0]} />
+      </Scaled>
       <Ramp />
       <Block />
     </StandardEnvironment>

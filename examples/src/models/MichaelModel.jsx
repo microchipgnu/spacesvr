@@ -1,5 +1,6 @@
 import { DRACO_URL } from "../../../src/services";
 import { useGLTF } from "@react-three/drei";
+import { useRef, useEffect } from "react";
 
 const MichaelModel = (props) => {
   const gltf = useGLTF(
@@ -7,8 +8,16 @@ const MichaelModel = (props) => {
     DRACO_URL
   );
 
+  const group = useRef();
+
+  useEffect(() => {
+    if (group.current) {
+      group.current.traverse((child) => (child.frustumCulled = false));
+    }
+  }, []);
+
   return (
-    <group {...props}>
+    <group ref={group} {...props}>
       <primitive object={gltf.scene} />
     </group>
   );

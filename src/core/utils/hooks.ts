@@ -20,3 +20,18 @@ export const useValidBrowser = (keywords?: string[]) => {
 
   return valid;
 };
+
+export function useKeyCode(key: string, callback: () => void, deps: any[]) {
+  const onKeyPress = (e: KeyboardEvent) => {
+    if (e.key.toLowerCase() === key) {
+      callback();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keypress", onKeyPress);
+    return () => {
+      window.removeEventListener("keypress", onKeyPress);
+    };
+  }, deps);
+}

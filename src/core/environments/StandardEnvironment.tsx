@@ -22,6 +22,7 @@ import { isMobile } from "react-device-detect";
 import { Props as ContainerProps } from "@react-three/fiber/dist/declarations/src/web/Canvas";
 import { AdaptiveDpr } from "@react-three/drei";
 import { RegisterMenuItems } from "../utils/menu";
+import World from "../contexts/world";
 
 const Container = styled.div`
   position: absolute;
@@ -116,11 +117,13 @@ export const StandardEnvironment = (
               <SimulationContext.Provider value={simState}>
                 <RegisterMenuItems />
                 {adaptiveDPR && <AdaptiveDpr />}
-                <Player {...playerProps}>
-                  <Entities />
-                  {!disableGround && <InfinitePlane height={-0.001} />}
-                  {children}
-                </Player>
+                <World>
+                  <Player {...playerProps}>
+                    <Entities />
+                    {!disableGround && <InfinitePlane height={-0.001} />}
+                    {children}
+                  </Player>
+                </World>
               </SimulationContext.Provider>
             </EnvironmentContext.Provider>
           </Physics>
