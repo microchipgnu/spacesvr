@@ -18,8 +18,6 @@ const UnsuspensedImage = (props: ImageProps) => {
   const { gl } = useThree();
 
   const isKtx = src.includes(".ktx2");
-  const ogWidth = 1,
-    ogHeight = 1;
 
   const texture = useLoader(
     // @ts-ignore
